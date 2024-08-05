@@ -1,0 +1,8 @@
+{
+    "tabWidth": 4,
+    "svelteSortOrder": "scripts-markup-styles",
+    "htmlWhitespaceSensitivity": "ignore",
+    "printWidth": 150,
+    "semi": false,
+    "singleQuote": true
+}
