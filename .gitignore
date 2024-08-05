@@ -1,4 +1,5 @@
-build/bin
+build
+.vscode
 node_modules
 frontend/dist
 index.bleve
