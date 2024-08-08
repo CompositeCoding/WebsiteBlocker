@@ -17,7 +17,14 @@
     })
 </script>
 
-<main>
+<main class="block">
     <SearchBox />
     <DomainList {data} />
 </main>
+
+<style>
+    .block {
+        display: flex;
+        flex-direction: column;
+    }
+</style>

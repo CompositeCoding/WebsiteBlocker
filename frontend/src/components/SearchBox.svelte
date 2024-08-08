@@ -1,5 +1,6 @@
 <script lang="ts">
     import { AddDomain, Query } from '../../wailsjs/go/main/App.js'
+    import AutoCompleteItem from './AutoCompleteItem.svelte'
 
     let filtered = []
     let inputValue = ''
@@ -27,30 +28,34 @@
     });
 </script>
 
-<div class="form-card">
+    <div class="form-card">
 
-    <h4>Add Website to Block List</h4>
-
-    <form autocomplete="off" on:submit|preventDefault={addBlockedDomain}>
-        
-        <div class="autocomplete">
-            <div class="form-box">
-                <input class="input-box" type="text" placeholder="Block Domain Name" bind:value={inputValue} on:input={query} />
-                <button class="add-button" type="submit">Add</button>
+                <h3> <img class="inline-image" src="/src/img/stop-signs-svgrepo-com.svg" alt="Stop sign"/> Add Website to Block List</h3>
+                <form autocomplete="off" on:submit|preventDefault={addBlockedDomain}>
+                    <div class="form-box">
+                        <input class="input-box" type="text" placeholder="Block Domain Name" bind:value={inputValue} on:input={query} />
+                        <button class="add-button" type="submit">Block</button>
+                    </div>
+                </form>
             </div>
-
             {#if filtered?.length > 0}
-                <ul id="autocomplete-items-list">
-                    {#each filtered.slice(0, 7) as domain, i}
-                        <li><button on:click={() => setInputVal(domain)}>{domain}</button></li>
-                    {/each}
-                </ul>
+                <div class="autocomplete-box">
+                    <div class="autocomplete-items-list " >
+                        {#each filtered.slice(0, 7) as domain, i}
+                            <AutoCompleteItem {domain} {setInputVal}  />
+                        {/each}
+                    </div>
+                </div>
             {/if}
-        </div>
-    </form>
-</div>
 
-<style>
+    <style>
+
+    .inline-image {
+        display: inline-block;
+        vertical-align: middle;
+        width: 30px; /* Set the image width to 20px */
+        height: 30px; /* Set the image height to 20px */
+    }
 
     .form-card {
         display: flex;
@@ -64,6 +69,7 @@
         margin-top: 25px;
         margin-left: 10vw;
         margin-right: 10vw;
+        margin-bottom: 30px;
         padding: 10px;
     }
 
@@ -104,20 +110,24 @@
         border-color: #666;
     }
 
-    div.autocomplete {
+    .autocomplete-box{
+        z-index: 1;
         position: relative;
-        display: inline-block;
-        width: 90%;
-    }
-    #autocomplete-items-list {
-        position: absolute;
-        list-style: none;
         text-align: left;
+        margin-top: 12px;
+        margin-left: 10vw;
+        margin-right: 10vw;
+        border: 1px solid #555;
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
         left: 0;
         border: 1px solid;
-        background-color: #444;
-        border-color: #666;
-        padding-top: 25px;
-        padding-bottom: 25px;
+        background-color: #333;
+        border: 1px solid #555;
+    }
+
+    .autocomplete-items-list {
+        padding-left: 0px;
     }
 </style>
